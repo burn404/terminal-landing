@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>burn404 | Portfolio</title>
   <style>
     body {
@@ -28,7 +28,7 @@
       margin-top: 30px;
     }
 
-    a.button {
+    a.button, button {
       background-color: #00ffcc;
       color: black;
       padding: 10px 20px;
@@ -37,48 +37,56 @@
       font-weight: bold;
       display: inline-block;
       margin: 10px;
+      font-family: monospace;
+      border: none;
       cursor: pointer;
     }
 
-    a.button:hover {
+    a.button:hover, button:hover {
       background-color: #00997a;
     }
 
-    /* Popup window styles */
     #about-popup {
       display: none;
       position: fixed;
-      left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #000;
+      left: 50%;
+      width: 90%;
+      max-width: 600px;
+      background: black;
+      color: #00ffcc;
       border: 2px solid #00ffcc;
       padding: 20px;
-      max-width: 600px;
-      color: #00ffcc;
-      font-family: monospace;
+      transform: translate(-50%, -50%);
       z-index: 1000;
-      text-align: left;
-      box-shadow: 0 0 15px #00ffcc;
-      border-radius: 8px;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 999;
     }
 
     #about-popup h2 {
       margin-top: 0;
-      text-align: center;
     }
 
-    #about-popup button.close-btn {
-      background-color: #00ffcc;
-      border: none;
-      color: black;
-      font-weight: bold;
+    #close-btn {
+      background: none;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
       padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      float: right;
-      margin-top: -10px;
-      margin-right: -10px;
+      margin-top: 10px;
+    }
+
+    #close-btn:hover {
+      background-color: #00ffcc;
+      color: black;
     }
   </style>
 </head>
@@ -95,32 +103,27 @@
     <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank">Support via PayPal</a>
     <a class="button" href="https://github.com/burn404" target="_blank">GitHub</a>
     <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
-
-    <br />
-    <!-- Button to open About Me popup -->
-    <button class="button" id="about-btn">About Me</button>
+    <button onclick="showAbout()">About Me</button>
   </div>
 
-  <!-- About Me popup window -->
-  <div id="about-popup" role="dialog" aria-modal="true" aria-labelledby="about-title">
-    <button class="close-btn" id="close-popup">&times;</button>
-    <section id="about-me" style="max-width: 100%; margin: 0; color: #00ffcc; font-family: monospace; text-align: left;">
-      <h2 id="about-title" style="text-align:center;">About Me</h2>
-      <p>
-        I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.  
-        I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
-      </p>
-      <p>
-        I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.  
-        Every project helps me level up and get closer to working in tech full time.
-      </p>
-      <p>
-        While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
-      </p>
-      <p>
-        If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
-      </p>
-    </section>
+  <div id="overlay" onclick="closeAbout()"></div>
+  <div id="about-popup">
+    <h2>About Me</h2>
+    <p>
+      I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.  
+      I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
+    </p>
+    <p>
+      I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.  
+      Every project helps me level up and get closer to working in tech full time.
+    </p>
+    <p>
+      While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
+    </p>
+    <p>
+      If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
+    </p>
+    <button id="close-btn" onclick="closeAbout()">Close</button>
   </div>
 
   <script>
@@ -138,8 +141,9 @@
     function typeLine() {
       if (lineIndex >= textLines.length) {
         setTimeout(() => {
+          terminal.style.display = 'none';
           content.style.display = 'block';
-        }, 500);
+        }, 800);
         return;
       }
 
@@ -148,36 +152,26 @@
       if (charIndex < currentLine.length) {
         terminal.textContent += currentLine.charAt(charIndex);
         charIndex++;
-        setTimeout(typeLine, 40);
+        setTimeout(typeLine, 40); // typing speed
       } else {
         terminal.textContent += "\n";
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeLine, 300);
+        setTimeout(typeLine, 300); // pause between lines
       }
     }
 
+    function showAbout() {
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('about-popup').style.display = 'block';
+    }
+
+    function closeAbout() {
+      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('about-popup').style.display = 'none';
+    }
+
     typeLine();
-
-    // About popup open/close
-    const aboutBtn = document.getElementById('about-btn');
-    const aboutPopup = document.getElementById('about-popup');
-    const closeBtn = document.getElementById('close-popup');
-
-    aboutBtn.addEventListener('click', () => {
-      aboutPopup.style.display = 'block';
-    });
-
-    closeBtn.addEventListener('click', () => {
-      aboutPopup.style.display = 'none';
-    });
-
-    // Also close popup if user clicks outside the popup content
-    window.addEventListener('click', (e) => {
-      if (e.target === aboutPopup) {
-        aboutPopup.style.display = 'none';
-      }
-    });
   </script>
 
 </body>
