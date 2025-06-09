@@ -1,57 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio Landing</title>
-<style>
-  body {
-    background-color: black;
-    color: #00ffcc;
-    font-family: monospace;
-    padding: 40px;
-    text-align: center;
-  }
-  #terminal {
-    white-space: pre-wrap;
-    font-size: 18px;
-    line-height: 1.5;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>burn404 | Portfolio</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ffcc;
+      font-family: monospace;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      min-height: 100px;
+    }
+
+    #main-content {
+      display: none;
+      margin-top: 30px;
+    }
+
+    a.button {
+      background-color: #00ffcc;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin: 10px;
+    }
+
+    a.button:hover {
+      background-color: #00997a;
+    }
+  </style>
 </head>
 <body>
 
-<div id="terminal"></div>
+  <div id="terminal"></div>
 
-<script>
-const textLines = [
-  "Connecting to burn404...",
-  "Accessing credentials...",
-  "Welcome, seeker."
-];
+  <div id="main-content">
+    <h1>Welcome to my Portfolio</h1>
+    <p>🔍 Self-taught in cybersecurity, CTFs, and Python programming</p>
+    <p>💻 Completed challenges on PicoCTF, explored TryHackMe, and built <a href="https://burn404.github.io/ctf-puzzle/" target="_blank" style="color:#00ffcc">Luminaria</a></p>
+    <p>🚀 Passionate about learning and breaking into tech. Looking for freelance, internships, or junior roles.</p>
+    <p>📨 <a href="mailto:serverone404@gmail.com" style="color: #00ffcc;">serverone404@gmail.com</a></p>
+    <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank">Support via PayPal</a>
+    <a class="button" href="https://github.com/burn404" target="_blank">GitHub</a>
+    <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
+  </div>
 
-const terminal = document.getElementById('terminal');
-let lineIndex = 0;
-let charIndex = 0;
+  <script>
+    const textLines = [
+      "Connecting to burn404...",
+      "Accessing credentials...",
+      "Welcome, seeker."
+    ];
 
-function typeLine() {
-  if (lineIndex >= textLines.length) return;
-  const currentLine = textLines[lineIndex];
+    const terminal = document.getElementById('terminal');
+    const content = document.getElementById('main-content');
+    let lineIndex = 0;
+    let charIndex = 0;
 
-  if (charIndex < currentLine.length) {
-    terminal.textContent += currentLine.charAt(charIndex);
-    charIndex++;
-    setTimeout(typeLine, 40); // faster typing: 40ms per char
-  } else {
-    terminal.textContent += "\n";
-    lineIndex++;
-    charIndex = 0;
-    setTimeout(typeLine, 300); // short pause between lines
-  }
-}
+    function typeLine() {
+      if (lineIndex >= textLines.length) {
+        setTimeout(() => {
+          content.style.display = 'block';
+        }, 500);
+        return;
+      }
 
-typeLine();
-</script>
+      const currentLine = textLines[lineIndex];
+
+      if (charIndex < currentLine.length) {
+        terminal.textContent += currentLine.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLine, 40); // fast typing speed
+      } else {
+        terminal.textContent += "\n";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeLine, 300); // pause between lines
+      }
+    }
+
+    typeLine();
+  </script>
 
 </body>
 </html>
