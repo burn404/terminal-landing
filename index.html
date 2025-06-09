@@ -2,49 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>burn404 | Portfolio</title>
   <style>
     body {
-      margin: 0;
-      height: 100vh;
       background-color: black;
       color: #00ffcc;
       font-family: monospace;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      padding: 40px;
       text-align: center;
     }
+
     #terminal {
       white-space: pre-wrap;
-      font-size: 22px;
-      line-height: 1.4;
-      min-height: 90px;
-      user-select: none;
-      margin-bottom: 40px;
-    }
-    #about-me {
-      max-width: 600px;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.5;
-      display: none;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      min-height: 100px;
     }
-    a.button {
+
+    #main-content {
+      display: none;
+      margin-top: 30px;
+    }
+
+    a.button, button {
       background-color: #00ffcc;
       color: black;
       padding: 10px 20px;
       border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
-      margin: 15px 10px 0;
       display: inline-block;
-      transition: background-color 0.3s ease;
+      margin: 10px 5px;
+      cursor: pointer;
+      border: none;
+      font-family: monospace;
+      font-size: 16px;
     }
-    a.button:hover {
+
+    a.button:hover, button:hover {
       background-color: #00997a;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 10; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      font-family: monospace;
+    }
+
+    .modal-content {
+      background-color: #001a1a;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 500px;
+      color: #00ffcc;
+      text-align: left;
+      white-space: pre-wrap;
+      font-size: 16px;
+      line-height: 1.4;
+      position: relative;
+    }
+
+    .close-btn {
+      color: #00ffcc;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -52,49 +92,86 @@
 
   <div id="terminal"></div>
 
-  <div id="about-me">
-    <h2>About Me</h2>
-    <p>I'm a self-taught tech explorer passionate about Python programming, cybersecurity, and solving complex puzzles.</p>
-    <p>I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling and cryptography.</p>
-    <p>I’ve completed challenges on PicoCTF and TryHackMe and built projects on GitHub Pages.</p>
-    <p>Open to internships, freelance work, and junior roles.</p>
-    <p>Contact me at <a href="mailto:serverone404@gmail.com" style="color:#00ffcc;">serverone404@gmail.com</a></p>
+  <div id="main-content">
+    <h1>Welcome to my Portfolio</h1>
+    <p>🔍 Self-taught in cybersecurity, CTFs, and Python programming</p>
+    <p>💻 Completed challenges on PicoCTF, explored TryHackMe, and built <a href="https://burn404.github.io/ctf-puzzle/" target="_blank" style="color:#00ffcc">Luminaria</a></p>
+    <p>🚀 Passionate about learning and breaking into tech. Looking for freelance, internships, or junior roles.</p>
+    <button id="aboutBtn">About Me</button>
+    <p>📨 <a href="mailto:serverone404@gmail.com" style="color: #00ffcc;">serverone404@gmail.com</a></p>
     <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank">Support via PayPal</a>
     <a class="button" href="https://github.com/burn404" target="_blank">GitHub</a>
     <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
   </div>
 
+  <!-- Modal Structure -->
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>About Me</h2>
+      <p>
+        I'm a self-taught programmer and cybersecurity enthusiast.<br>
+        I've completed challenges on PicoCTF, explored TryHackMe, and developed the puzzle project Luminaria.<br>
+        Passionate about learning, hacking, and breaking into the tech world.<br>
+        Always eager for freelance, internship, or junior-level opportunities.
+      </p>
+    </div>
+  </div>
+
   <script>
-    const lines = [
+    const textLines = [
       "Connecting to burn404...",
       "Accessing credentials...",
       "Welcome, seeker."
     ];
+
     const terminal = document.getElementById('terminal');
-    const about = document.getElementById('about-me');
+    const content = document.getElementById('main-content');
     let lineIndex = 0;
     let charIndex = 0;
 
-    function type() {
-      if (lineIndex >= lines.length) {
+    function typeLine() {
+      if (lineIndex >= textLines.length) {
         setTimeout(() => {
-          about.style.display = 'block';
-        }, 400);
+          content.style.display = 'block';
+        }, 500);
         return;
       }
-      let currentLine = lines[lineIndex];
+
+      const currentLine = textLines[lineIndex];
+
       if (charIndex < currentLine.length) {
         terminal.textContent += currentLine.charAt(charIndex);
         charIndex++;
-        setTimeout(type, 40);
+        setTimeout(typeLine, 40);
       } else {
         terminal.textContent += "\n";
         lineIndex++;
         charIndex = 0;
-        setTimeout(type, 300);
+        setTimeout(typeLine, 300);
       }
     }
-    type();
+
+    typeLine();
+
+    // Modal logic
+    const modal = document.getElementById('aboutModal');
+    const openBtn = document.getElementById('aboutBtn');
+    const closeBtn = document.getElementById('closeModal');
+
+    openBtn.onclick = () => {
+      modal.style.display = 'block';
+    };
+
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
   </script>
 
 </body>
