@@ -9,8 +9,23 @@
       background-color: black;
       color: #00ffcc;
       font-family: monospace;
-      padding: 40px;
-      text-align: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #terminal-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     #terminal {
@@ -18,14 +33,15 @@
       font-size: 18px;
       line-height: 1.5;
       max-width: 600px;
-      margin: 0 auto;
       text-align: left;
-      min-height: 100px;
+      padding: 20px;
     }
 
     #main-content {
       display: none;
-      margin-top: 30px;
+      max-width: 600px;
+      text-align: center;
+      padding: 40px;
     }
 
     a.button, button {
@@ -92,7 +108,9 @@
 </head>
 <body>
 
-  <div id="terminal"></div>
+  <div id="terminal-container">
+    <div id="terminal"></div>
+  </div>
 
   <div id="main-content">
     <h1>Welcome to my Portfolio</h1>
@@ -134,6 +152,7 @@
     ];
 
     const terminal = document.getElementById('terminal');
+    const terminalContainer = document.getElementById('terminal-container');
     const content = document.getElementById('main-content');
     let lineIndex = 0;
     let charIndex = 0;
@@ -141,7 +160,7 @@
     function typeLine() {
       if (lineIndex >= textLines.length) {
         setTimeout(() => {
-          terminal.style.display = 'none';
+          terminalContainer.style.display = 'none';
           content.style.display = 'block';
         }, 800);
         return;
@@ -152,12 +171,12 @@
       if (charIndex < currentLine.length) {
         terminal.textContent += currentLine.charAt(charIndex);
         charIndex++;
-        setTimeout(typeLine, 40); // typing speed
+        setTimeout(typeLine, 40);
       } else {
         terminal.textContent += "\n";
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeLine, 300); // pause between lines
+        setTimeout(typeLine, 300);
       }
     }
 
