@@ -1,113 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>burn404 Portfolio</title>
-  <style>
-    body {
-      background-color: black;
-      color: #00ffcc;
-      font-family: monospace, monospace;
-      margin: 0;
-      padding: 40px 20px;
-      text-align: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 30px;
-    }
-    .intro-text {
-      font-size: 1.2rem;
-      white-space: pre-line;
-      margin-bottom: 40px;
-    }
-    h1 {
-      margin-bottom: 0;
-    }
-    .intro {
-      font-size: 1.2rem;
-    }
-    .projects {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .project-card {
-      border: 1px solid #00ffcc;
-      border-radius: 8px;
-      padding: 15px;
-      width: 180px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-    }
-    .project-card:hover {
-      background-color: #00ffcc;
-      color: black;
-      cursor: pointer;
-    }
-    a.project-link {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-    .contact, .support {
-      margin-top: 40px;
-    }
-    a.button {
-      background-color: #00ffcc;
-      color: black;
-      padding: 10px 25px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      font-family: monospace;
-      transition: background-color 0.3s ease;
-    }
-    a.button:hover {
-      background-color: #00997a;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>burn404 Portfolio</title>
+<style>
+  body {
+    background-color: black;
+    color: #00ffcc;
+    font-family: monospace;
+    margin: 0;
+    padding: 40px 20px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #terminal {
+    white-space: pre;
+    font-size: 1.2rem;
+    min-height: 4.5em;
+  }
+  #content {
+    display: none;
+    margin-top: 30px;
+  }
+  h1 {
+    margin-bottom: 0;
+  }
+  .projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 20px auto 0;
+  }
+  .project-card {
+    border: 1px solid #00ffcc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  .project-card:hover {
+    background-color: #00ffcc;
+    color: black;
+    cursor: pointer;
+  }
+  a.project-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+  }
+  .contact, .support {
+    margin-top: 40px;
+  }
+  a.button {
+    background-color: #00ffcc;
+    color: black;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: monospace;
+    transition: background-color 0.3s ease;
+  }
+  a.button:hover {
+    background-color: #00997a;
+  }
+</style>
 </head>
 <body>
-  <div class="intro-text">
-    Connecting to burn404...<br />
-    Accessing credentials...<br />
-    Welcome, seeker.
+  <div id="terminal"></div>
+
+  <div id="content">
+    <h1>burn404</h1>
+    <p>Self-taught programmer & aspiring cybersecurity enthusiast.<br />
+      Exploring PicoCTF, TryHackMe, and Python programming.<br />
+      Creating puzzles and challenges like <strong>Luminaria CTF</strong>.
+    </p>
+
+    <section class="projects" aria-label="Featured Projects">
+      <div class="project-card" tabindex="0">
+        Luminaria CTF<br />
+        <a class="project-link" href="https://burn404.github.io/ctf-puzzle/" target="_blank" rel="noopener noreferrer">View Puzzle</a>
+      </div>
+      <div class="project-card" tabindex="0">
+        YouTube Channel<br />
+        <a class="project-link" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank" rel="noopener noreferrer">Watch Videos</a>
+      </div>
+      <div class="project-card" tabindex="0">
+        GitHub Profile<br />
+        <a class="project-link" href="https://github.com/burn404" target="_blank" rel="noopener noreferrer">View Code</a>
+      </div>
+    </section>
+
+    <section class="contact">
+      📧 <a href="mailto:serverone404@gmail.com" style="color: #00ffcc;">serverone404@gmail.com</a>
+    </section>
+
+    <section class="support">
+      <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank" rel="noopener noreferrer">Support My Work</a>
+    </section>
   </div>
 
-  <h1>burn404</h1>
-  <p class="intro">Self-taught programmer & aspiring cybersecurity enthusiast.<br />
-    Exploring PicoCTF, TryHackMe, and Python programming.<br />
-    Creating puzzles and challenges like <strong>Luminaria CTF</strong>.</p>
+<script>
+  const lines = [
+    'Connecting to burn404...',
+    'Accessing credentials...',
+    'Welcome, seeker.'
+  ];
 
-  <section class="projects" aria-label="Featured Projects">
-    <div class="project-card" tabindex="0">
-      Luminaria CTF<br />
-      <a class="project-link" href="https://burn404.github.io/ctf-puzzle/" target="_blank" rel="noopener noreferrer">View Puzzle</a>
-    </div>
-    <div class="project-card" tabindex="0">
-      YouTube Channel<br />
-      <a class="project-link" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank" rel="noopener noreferrer">Watch Videos</a>
-    </div>
-    <div class="project-card" tabindex="0">
-      GitHub Profile<br />
-      <a class="project-link" href="https://github.com/burn404" target="_blank" rel="noopener noreferrer">View Code</a>
-    </div>
-  </section>
+  const terminal = document.getElementById('terminal');
+  const content = document.getElementById('content');
 
-  <section class="contact">
-    📧 <a href="mailto:serverone404@gmail.com" style="color: #00ffcc;">serverone404@gmail.com</a>
-  </section>
+  let currentLine = 0;
+  let currentChar = 0;
 
-  <section class="support">
-    <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank" rel="noopener noreferrer">Support My Work</a>
-  </section>
+  function type() {
+    if (currentLine >= lines.length) {
+      // Show content and hide terminal text after typing
+      terminal.style.display = 'none';
+      content.style.display = 'block';
+      return;
+    }
+
+    if (currentChar < lines[currentLine].length) {
+      terminal.textContent += lines[currentLine].charAt(currentChar);
+      currentChar++;
+      setTimeout(type, 100);
+    } else {
+      terminal.textContent += '\n';
+      currentLine++;
+      currentChar = 0;
+      setTimeout(type, 500);
+    }
+  }
+
+  type();
+</script>
 </body>
 </html>
