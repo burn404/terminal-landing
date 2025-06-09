@@ -1,17 +1,213 @@
-<section id="about-me" style="max-width:600px; margin: 40px auto; color: #00ffcc; font-family: monospace; text-align: center;">
-  <h2>About Me</h2>
-  <p>
-    I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.  
-    I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
-  </p>
-  <p>
-    I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.  
-    Every project helps me level up and get closer to working in tech full time.
-  </p>
-  <p>
-    While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
-  </p>
-  <p>
-    If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
-  </p>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>burn404 | Portfolio</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ffcc;
+      font-family: monospace;
+      padding: 40px;
+      text-align: center;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      font-size: 18px;
+      line-height: 1.5;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+      min-height: 100px;
+    }
+
+    #main-content {
+      display: none;
+      margin-top: 30px;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    a.button {
+      background-color: #00ffcc;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin: 10px 5px;
+    }
+
+    a.button:hover {
+      background-color: #00997a;
+    }
+
+    #about-me-button {
+      background-color: transparent;
+      border: 1px solid #00ffcc;
+      color: #00ffcc;
+      padding: 10px 20px;
+      margin: 40px auto 0;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 16px;
+    }
+
+    #about-me-button:hover {
+      background-color: #00ffcc;
+      color: black;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 10; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      font-family: monospace;
+    }
+
+    .modal-content {
+      background-color: #001a1a;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 600px;
+      color: #00ffcc;
+      text-align: center;
+      white-space: normal;
+      font-size: 16px;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .close-btn {
+      color: #00ffcc;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="terminal"></div>
+
+  <div id="main-content">
+    <h1>Welcome to my Portfolio</h1>
+    <p>🔍 Self-taught in cybersecurity, CTFs, and Python programming</p>
+    <p>💻 Completed challenges on PicoCTF, explored TryHackMe, and built <a href="https://burn404.github.io/ctf-puzzle/" target="_blank" style="color:#00ffcc">Luminaria</a></p>
+    <p>🚀 Passionate about learning and breaking into tech. Looking for freelance, internships, or junior roles.</p>
+    <p>📨 <a href="mailto:serverone404@gmail.com" style="color: #00ffcc;">serverone404@gmail.com</a></p>
+    <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank">Support via PayPal</a>
+    <a class="button" href="https://github.com/burn404" target="_blank">GitHub</a>
+    <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
+  </div>
+
+  <button id="about-me-button">About Me</button>
+
+  <!-- Modal Structure -->
+  <div id="aboutModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="aboutMeTitle" aria-modal="true">
+    <div class="modal-content" role="document">
+      <span class="close-btn" id="closeModal" aria-label="Close About Me">&times;</span>
+      <section id="about-me" style="color: #00ffcc; font-family: monospace; text-align: center;">
+        <h2 id="aboutMeTitle">About Me</h2>
+        <p>
+          I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.<br>
+          I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
+        </p>
+        <p>
+          I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.<br>
+          Every project helps me level up and get closer to working in tech full time.
+        </p>
+        <p>
+          While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
+        </p>
+        <p>
+          If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const textLines = [
+      "Connecting to burn404...",
+      "Accessing credentials...",
+      "Welcome, seeker."
+    ];
+
+    const terminal = document.getElementById('terminal');
+    const content = document.getElementById('main-content');
+    const aboutBtn = document.getElementById('about-me-button');
+    const modal = document.getElementById('aboutModal');
+    const closeBtn = document.getElementById('closeModal');
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeLine() {
+      if (lineIndex >= textLines.length) {
+        setTimeout(() => {
+          content.style.display = 'block';
+          aboutBtn.style.display = 'inline-block';
+        }, 500);
+        return;
+      }
+
+      const currentLine = textLines[lineIndex];
+
+      if (charIndex < currentLine.length) {
+        terminal.textContent += currentLine.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLine, 40);
+      } else {
+        terminal.textContent += "\n";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeLine, 300);
+      }
+    }
+
+    typeLine();
+
+    aboutBtn.onclick = () => {
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+    };
+
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+    };
+
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    };
+  </script>
+
+</body>
+</html>
