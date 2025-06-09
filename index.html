@@ -5,101 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>burn404 | Portfolio</title>
   <style>
-    /* Background with matrix-like falling text effect */
     body {
       margin: 0;
       height: 100vh;
-      overflow: hidden;
       background-color: black;
-      font-family: monospace;
       color: #00ffcc;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    }
-    /* Container for main content and fake file system */
-    #container {
-      display: flex;
-      max-width: 1000px;
-      width: 90vw;
-      height: 90vh;
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px solid #00ffcc;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ffcc;
-    }
-
-    /* Fake file system sidebar */
-    #fake-fs {
-      width: 200px;
-      background: #001a14;
-      border-right: 1px solid #00ffcc;
-      padding: 20px;
-      overflow-y: auto;
-      box-sizing: border-box;
-    }
-    #fake-fs h3 {
-      margin-top: 0;
-      font-weight: bold;
-      border-bottom: 1px solid #00ffcc;
-      padding-bottom: 5px;
-    }
-    #fake-fs ul {
-      list-style-type: none;
-      padding-left: 10px;
-    }
-    #fake-fs li {
-      padding: 3px 0;
-      cursor: default;
-    }
-    #fake-fs li.folder::before {
-      content: "📁 ";
-    }
-    #fake-fs li.file::before {
-      content: "📄 ";
-    }
-
-    /* Main content area */
-    #main {
-      flex: 1;
-      padding: 30px 40px;
-      overflow-y: auto;
+      font-family: monospace;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color: #00ffcc;
-      position: relative;
-      min-width: 300px;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
     }
-
-    /* Terminal intro styling */
     #terminal {
       white-space: pre-wrap;
-      font-size: 20px;
+      font-size: 22px;
       line-height: 1.4;
-      min-height: 80px;
+      min-height: 90px;
       user-select: none;
       margin-bottom: 40px;
     }
-
-    /* About me section */
     #about-me {
       max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
       font-size: 16px;
       line-height: 1.5;
+      display: none;
     }
-    #about-me h2 {
-      margin-bottom: 15px;
-      font-weight: normal;
-      font-size: 24px;
-      text-decoration: underline;
-    }
-
-    /* Buttons */
-    .button {
+    a.button {
       background-color: #00ffcc;
       color: black;
       padding: 10px 20px;
@@ -110,69 +43,59 @@
       display: inline-block;
       transition: background-color 0.3s ease;
     }
-    .button:hover {
+    a.button:hover {
       background-color: #00997a;
     }
-
-    /* Scrollbar styling for fake fs */
-    #fake-fs::-webkit-scrollbar {
-      width: 8px;
-    }
-    #fake-fs::-webkit-scrollbar-thumb {
-      background-color: #00ffcc88;
-      border-radius: 4px;
-    }
-
   </style>
 </head>
 <body>
 
-  <div id="container">
+  <div id="terminal"></div>
 
-    <nav id="fake-fs" aria-label="Fake file system">
-      <h3>~/burn404</h3>
-      <ul>
-        <li class="folder">projects
-          <ul>
-            <li class="folder">Luminaria</li>
-            <li class="folder">Portfolio</li>
-          </ul>
-        </li>
-        <li class="folder">downloads
-          <ul>
-            <li class="file">silence_with_message.wav</li>
-            <li class="file">Voicecom.mp3</li>
-            <li class="file">puzzle.zip</li>
-            <li class="file">puzzle.jpg</li>
-          </ul>
-        </li>
-        <li class="file">README.txt</li>
-        <li class="file">about_me.txt</li>
-      </ul>
-    </nav>
+  <div id="about-me">
+    <h2>About Me</h2>
+    <p>I'm a self-taught tech explorer passionate about Python programming, cybersecurity, and solving complex puzzles.</p>
+    <p>I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling and cryptography.</p>
+    <p>I’ve completed challenges on PicoCTF and TryHackMe and built projects on GitHub Pages.</p>
+    <p>Open to internships, freelance work, and junior roles.</p>
+    <p>Contact me at <a href="mailto:serverone404@gmail.com" style="color:#00ffcc;">serverone404@gmail.com</a></p>
+    <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank">Support via PayPal</a>
+    <a class="button" href="https://github.com/burn404" target="_blank">GitHub</a>
+    <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
+  </div>
 
-    <main id="main" role="main" aria-label="Portfolio main content">
+  <script>
+    const lines = [
+      "Connecting to burn404...",
+      "Accessing credentials...",
+      "Welcome, seeker."
+    ];
+    const terminal = document.getElementById('terminal');
+    const about = document.getElementById('about-me');
+    let lineIndex = 0;
+    let charIndex = 0;
 
-      <div id="terminal" aria-live="polite" aria-atomic="true"></div>
+    function type() {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          about.style.display = 'block';
+        }, 400);
+        return;
+      }
+      let currentLine = lines[lineIndex];
+      if (charIndex < currentLine.length) {
+        terminal.textContent += currentLine.charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 40);
+      } else {
+        terminal.textContent += "\n";
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(type, 300);
+      }
+    }
+    type();
+  </script>
 
-      <section id="about-me" tabindex="0">
-        <h2>About Me</h2>
-        <p>
-          I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.<br />
-          I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
-        </p>
-        <p>
-          I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.<br />
-          Every project helps me level up and get closer to working in tech full time.
-        </p>
-        <p>
-          While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
-        </p>
-        <p>
-          If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
-        </p>
-
-        <a href="mailto:serverone404@gmail.com" class="button" target="_blank" rel="noopener noreferrer">Contact Me</a>
-        <a href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" class="button" target="_blank" rel="noopener noreferrer">Support via PayPal</a>
-        <a href="https://github.com/burn404" class="button" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.youtube.com/channel/UCc-
+</body>
+</html>
