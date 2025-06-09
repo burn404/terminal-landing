@@ -21,6 +21,7 @@
       margin: 0 auto;
       text-align: left;
       min-height: 100px;
+      transition: opacity 0.5s ease;
     }
 
     #main-content {
@@ -74,7 +75,11 @@
     function typeLine() {
       if (lineIndex >= textLines.length) {
         setTimeout(() => {
-          content.style.display = 'block';
+          terminal.style.opacity = 0;
+          setTimeout(() => {
+            terminal.style.display = 'none';
+            content.style.display = 'block';
+          }, 600); // fade-out duration
         }, 500);
         return;
       }
