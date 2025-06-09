@@ -21,6 +21,18 @@
     white-space: pre;
     font-size: 1.2rem;
     min-height: 4.5em;
+    position: relative;
+    display: inline-block;
+  }
+  #cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: #00ffcc;
+    animation: blink 1s step-start infinite;
+    vertical-align: bottom;
+  }
+  @keyframes blink {
+    50% { background-color: transparent; }
   }
   #content {
     display: none;
@@ -76,7 +88,7 @@
 </style>
 </head>
 <body>
-  <div id="terminal"></div>
+  <div id="terminal"></div><div id="cursor"></div>
 
   <div id="content">
     <h1>burn404</h1>
@@ -117,15 +129,29 @@
   ];
 
   const terminal = document.getElementById('terminal');
+  const cursor = document.getElementById('cursor');
   const content = document.getElementById('content');
 
   let currentLine = 0;
   let currentChar = 0;
 
+  // Simple beep sound for typing (using Web Audio API)
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  function playBeep() {
+    const oscillator = audioCtx.createOscillator();
+    oscillator.type = 'square';
+    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+    oscillator.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.05);
+  }
+
   function type() {
     if (currentLine >= lines.length) {
-      // Show content and hide terminal text after typing
+      // Hide terminal text and cursor, show content
       terminal.style.display = 'none';
+      cursor.style.display = 'none';
       content.style.display = 'block';
       return;
     }
@@ -133,7 +159,8 @@
     if (currentChar < lines[currentLine].length) {
       terminal.textContent += lines[currentLine].charAt(currentChar);
       currentChar++;
-      setTimeout(type, 100);
+      playBeep();
+      setTimeout(type, 80);
     } else {
       terminal.textContent += '\n';
       currentLine++;
