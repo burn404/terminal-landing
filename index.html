@@ -3,82 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terminal Intro - Luminaria</title>
+  <title>burn404 Portfolio</title>
   <style>
     body {
       background-color: black;
       color: #00ffcc;
-      font-family: 'Courier New', Courier, monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: monospace, monospace;
       margin: 0;
-      padding: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
     }
-    #terminal {
-      max-width: 600px;
-      width: 100%;
-      background: #000;
-      border: 2px solid #00ffcc;
-      padding: 20px;
-      box-sizing: border-box;
-      box-shadow: 0 0 15px #00ffcc;
-      white-space: pre-wrap;
-      font-size: 1.2em;
-      line-height: 1.4em;
+    .intro-text {
+      font-size: 1.2rem;
+      white-space: pre-line;
+      margin-bottom: 40px;
     }
-    .blinking {
-      animation: blink 1s step-start infinite;
+    h1 {
+      margin-bottom: 0;
     }
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
+    .intro {
+      font-size: 1.2rem;
+    }
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .project-card {
+      border: 1px solid #00ffcc;
+      border-radius: 8px;
+      padding: 15px;
+      width: 180px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    .project-card:hover {
+      background-color: #00ffcc;
+      color: black;
+      cursor: pointer;
+    }
+    a.project-link {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    .contact, .support {
+      margin-top: 40px;
+    }
+    a.button {
+      background-color: #00ffcc;
+      color: black;
+      padding: 10px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: monospace;
+      transition: background-color 0.3s ease;
+    }
+    a.button:hover {
+      background-color: #00997a;
     }
   </style>
 </head>
 <body>
-  <div id="terminal"></div>
+  <div class="intro-text">
+    Connecting to burn404...<br />
+    Accessing credentials...<br />
+    Welcome, seeker.
+  </div>
 
-  <script>
-    const lines = [
-      "Connecting to burn404...",
-      "Accessing credentials...",
-      "Welcome, seeker.",
-      "Initializing challenge environment...",
-      "Loading files...",
-      "Your journey begins now."
-    ];
+  <h1>burn404</h1>
+  <p class="intro">Self-taught programmer & aspiring cybersecurity enthusiast.<br />
+    Exploring PicoCTF, TryHackMe, and Python programming.<br />
+    Creating puzzles and challenges like <strong>Luminaria CTF</strong>.</p>
 
-    const terminal = document.getElementById('terminal');
-    let currentLine = 0;
+  <section class="projects" aria-label="Featured Projects">
+    <div class="project-card" tabindex="0">
+      Luminaria CTF<br />
+      <a class="project-link" href="https://burn404.github.io/ctf-puzzle/" target="_blank" rel="noopener noreferrer">View Puzzle</a>
+    </div>
+    <div class="project-card" tabindex="0">
+      YouTube Channel<br />
+      <a class="project-link" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank" rel="noopener noreferrer">Watch Videos</a>
+    </div>
+    <div class="project-card" tabindex="0">
+      GitHub Profile<br />
+      <a class="project-link" href="https://github.com/burn404" target="_blank" rel="noopener noreferrer">View Code</a>
+    </div>
+  </section>
 
-    function typeLine(line, callback) {
-      let index = 0;
-      const interval = setInterval(() => {
-        terminal.textContent += line[index];
-        index++;
-        if (index === line.length) {
-          clearInterval(interval);
-          terminal.textContent += '\n';
-          callback();
-        }
-      }, 50);
-    }
+  <section class="contact">
+    📧 <a href="mailto:serverone404@gmail.com" style="color: #00ffcc;">serverone404@gmail.com</a>
+  </section>
 
-    function runTerminal() {
-      if (currentLine < lines.length) {
-        typeLine(lines[currentLine], () => {
-          currentLine++;
-          setTimeout(runTerminal, 500);
-        });
-      } else {
-        terminal.innerHTML += '<span class="blinking">_</span>';
-      }
-    }
-
-    runTerminal();
-  </script>
+  <section class="support">
+    <a class="button" href="https://paypal.me/SuziMatandi904?country.x=ZA&locale.x=en_US" target="_blank" rel="noopener noreferrer">Support My Work</a>
+  </section>
 </body>
 </html>
