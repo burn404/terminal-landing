@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>burn404 | Portfolio</title>
   <style>
     body {
@@ -10,13 +10,12 @@
       color: #00ffcc;
       font-family: monospace;
       padding: 40px;
-      text-align: center;
       margin: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
+      text-align: center;
     }
 
     #terminal {
@@ -27,6 +26,8 @@
       margin: 0 auto;
       text-align: left;
       min-height: 100px;
+      opacity: 1;
+      transition: opacity 1s ease;
     }
 
     #main-content {
@@ -124,7 +125,7 @@
     <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
   </div>
 
-  <button id="about-me-button">About Me</button>
+  <button id="about-me-button" style="display:none;">About Me</button>
 
   <!-- Modal Structure -->
   <div id="aboutModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="aboutMeTitle" aria-modal="true">
@@ -168,10 +169,15 @@
 
     function typeLine() {
       if (lineIndex >= textLines.length) {
+        // After typing finished, fade out the typed text then show content
         setTimeout(() => {
-          content.style.display = 'block';
-          aboutBtn.style.display = 'inline-block';
-        }, 500);
+          terminal.style.opacity = '0';
+          setTimeout(() => {
+            terminal.style.display = 'none';
+            content.style.display = 'block';
+            aboutBtn.style.display = 'inline-block';
+          }, 1000); // wait for fade-out transition
+        }, 700); // slight pause after last line typed
         return;
       }
 
