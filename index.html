@@ -10,7 +10,12 @@
       color: #00ffcc;
       font-family: monospace;
       padding: 40px;
-      text-align: center;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
     }
 
     #terminal {
@@ -18,7 +23,6 @@
       font-size: 18px;
       line-height: 1.5;
       max-width: 600px;
-      margin: 0 auto;
       text-align: left;
       min-height: 100px;
       transition: opacity 0.5s ease;
@@ -27,6 +31,7 @@
     #main-content {
       display: none;
       margin-top: 30px;
+      text-align: center;
     }
 
     a.button {
@@ -79,7 +84,7 @@
           setTimeout(() => {
             terminal.style.display = 'none';
             content.style.display = 'block';
-          }, 600); // fade-out duration
+          }, 600);
         }, 500);
         return;
       }
@@ -89,12 +94,12 @@
       if (charIndex < currentLine.length) {
         terminal.textContent += currentLine.charAt(charIndex);
         charIndex++;
-        setTimeout(typeLine, 40); // fast typing speed
+        setTimeout(typeLine, 40);
       } else {
         terminal.textContent += "\n";
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeLine, 300); // pause between lines
+        setTimeout(typeLine, 300);
       }
     }
 
