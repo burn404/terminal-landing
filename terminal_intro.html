@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terminal Intro - Luminaria</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    #terminal {
+      max-width: 600px;
+      width: 100%;
+      background: #000;
+      border: 2px solid #00ffcc;
+      padding: 20px;
+      box-sizing: border-box;
+      box-shadow: 0 0 15px #00ffcc;
+      white-space: pre-wrap;
+      font-size: 1.2em;
+      line-height: 1.4em;
+    }
+    .blinking {
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+
+  <script>
+    const lines = [
+      "Connecting to burn404...",
+      "Accessing credentials...",
+      "Welcome, seeker.",
+      "Initializing challenge environment...",
+      "Loading files...",
+      "Your journey begins now."
+    ];
+
+    const terminal = document.getElementById('terminal');
+    let currentLine = 0;
+
+    function typeLine(line, callback) {
+      let index = 0;
+      const interval = setInterval(() => {
+        terminal.textContent += line[index];
+        index++;
+        if (index === line.length) {
+          clearInterval(interval);
+          terminal.textContent += '\n';
+          callback();
+        }
+      }, 50);
+    }
+
+    function runTerminal() {
+      if (currentLine < lines.length) {
+        typeLine(lines[currentLine], () => {
+          currentLine++;
+          setTimeout(runTerminal, 500);
+        });
+      } else {
+        terminal.innerHTML += '<span class="blinking">_</span>';
+      }
+    }
+
+    runTerminal();
+  </script>
+</body>
+</html>
