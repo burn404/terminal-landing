@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>burn404 | Portfolio</title>
   <style>
-    body {
+    html, body {
+      height: 100%;
+      margin: 0;
       background-color: black;
       color: #00ffcc;
       font-family: monospace;
-      padding: 40px;
-      margin: 0;
-      min-height: 100vh;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: center; /* vertical centering */
+      align-items: center;     /* horizontal centering */
+      padding: 40px;
       text-align: center;
+      min-height: 100vh;
     }
 
     #terminal {
@@ -23,9 +28,9 @@
       font-size: 18px;
       line-height: 1.5;
       max-width: 600px;
-      margin: 0 auto;
       text-align: left;
       min-height: 100px;
+      margin: 0;
       opacity: 1;
       transition: opacity 1s ease;
     }
@@ -45,68 +50,21 @@
       text-decoration: none;
       font-weight: bold;
       display: inline-block;
-      margin: 10px 5px;
+      margin: 10px 10px 10px 0;
+      transition: background-color 0.3s ease;
     }
 
     a.button:hover {
       background-color: #00997a;
     }
 
-    #about-me-button {
-      background-color: transparent;
-      border: 1px solid #00ffcc;
-      color: #00ffcc;
-      padding: 10px 20px;
-      margin: 40px auto 0;
-      cursor: pointer;
-      border-radius: 5px;
-      font-family: monospace;
-      font-size: 16px;
-    }
-
-    #about-me-button:hover {
-      background-color: #00ffcc;
-      color: black;
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 10; 
-      left: 0;
-      top: 0;
-      width: 100%; 
-      height: 100%; 
-      overflow: auto;
-      background-color: rgba(0,0,0,0.7);
-      font-family: monospace;
-    }
-
-    .modal-content {
-      background-color: #001a1a;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #00ffcc;
-      border-radius: 8px;
-      width: 80%;
+    /* About me section at bottom */
+    #about-me {
       max-width: 600px;
+      margin: 40px auto 0;
       color: #00ffcc;
+      font-family: monospace;
       text-align: center;
-      white-space: normal;
-      font-size: 16px;
-      line-height: 1.5;
-      position: relative;
-    }
-
-    .close-btn {
-      color: #00ffcc;
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -125,31 +83,23 @@
     <a class="button" href="https://www.youtube.com/channel/UCc-O86GQ0wGoLoS3Z0bxNBw" target="_blank">YouTube</a>
   </div>
 
-  <button id="about-me-button" style="display:none;">About Me</button>
-
-  <!-- Modal Structure -->
-  <div id="aboutModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="aboutMeTitle" aria-modal="true">
-    <div class="modal-content" role="document">
-      <span class="close-btn" id="closeModal" aria-label="Close About Me">&times;</span>
-      <section id="about-me" style="color: #00ffcc; font-family: monospace; text-align: center;">
-        <h2 id="aboutMeTitle">About Me</h2>
-        <p>
-          I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.<br>
-          I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
-        </p>
-        <p>
-          I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.<br>
-          Every project helps me level up and get closer to working in tech full time.
-        </p>
-        <p>
-          While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
-        </p>
-        <p>
-          If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
-        </p>
-      </section>
-    </div>
-  </div>
+  <section id="about-me" style="display:none;">
+    <h2>About Me</h2>
+    <p>
+      I'm a self-taught tech explorer passionate about <strong>Python programming</strong>, <strong>cybersecurity</strong>, and solving complex puzzles.  
+      I recently created <em>Luminaria</em> — a Cicada 3301-inspired CTF challenge blending storytelling, cryptography, steganography, and interactive files to test curiosity and logic.
+    </p>
+    <p>
+      I learn by building. I’ve completed challenges on <strong>PicoCTF</strong> and <strong>TryHackMe</strong>, and designed immersive experiences using <strong>HTML</strong>, <strong>GitHub Pages</strong>, audio editing, and command-line tools.  
+      Every project helps me level up and get closer to working in tech full time.
+    </p>
+    <p>
+      While I’m still gaining formal experience, I’m hungry to grow. Open to internships, freelance work, and junior roles. Currently offering my skills from as little as <strong>$200/month</strong>.
+    </p>
+    <p>
+      If you'd like to support my journey or help raise funds for a new laptop, every bit counts — and I’m ready to prove what I can do.
+    </p>
+  </section>
 
   <script>
     const textLines = [
@@ -160,24 +110,20 @@
 
     const terminal = document.getElementById('terminal');
     const content = document.getElementById('main-content');
-    const aboutBtn = document.getElementById('about-me-button');
-    const modal = document.getElementById('aboutModal');
-    const closeBtn = document.getElementById('closeModal');
+    const aboutMe = document.getElementById('about-me');
 
     let lineIndex = 0;
     let charIndex = 0;
 
     function typeLine() {
       if (lineIndex >= textLines.length) {
-        // After typing finished, fade out the typed text then show content
+        // Fade out terminal text, then show main content and about me
+        terminal.style.opacity = '0';
         setTimeout(() => {
-          terminal.style.opacity = '0';
-          setTimeout(() => {
-            terminal.style.display = 'none';
-            content.style.display = 'block';
-            aboutBtn.style.display = 'inline-block';
-          }, 1000); // wait for fade-out transition
-        }, 700); // slight pause after last line typed
+          terminal.style.display = 'none';
+          content.style.display = 'block';
+          aboutMe.style.display = 'block';
+        }, 1000);
         return;
       }
 
@@ -186,33 +132,16 @@
       if (charIndex < currentLine.length) {
         terminal.textContent += currentLine.charAt(charIndex);
         charIndex++;
-        setTimeout(typeLine, 40);
+        setTimeout(typeLine, 40); // typing speed
       } else {
         terminal.textContent += "\n";
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeLine, 300);
+        setTimeout(typeLine, 300); // pause between lines
       }
     }
 
     typeLine();
-
-    aboutBtn.onclick = () => {
-      modal.style.display = 'block';
-      modal.setAttribute('aria-hidden', 'false');
-    };
-
-    closeBtn.onclick = () => {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-    };
-
-    window.onclick = (event) => {
-      if (event.target == modal) {
-        modal.style.display = 'none';
-        modal.setAttribute('aria-hidden', 'true');
-      }
-    };
   </script>
 
 </body>
